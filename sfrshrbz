@@ -1,0 +1,88 @@
+Option Compare Database
+Private Sub Form_Activate()
+Call fSetAccessWindow(0)
+End Sub
+Sub kapat()
+If MsgBox("Kullanıcı & Şifre oluşturma iptal edilecek ve uygulamadan çıkacaksınız.." _
+& " Emin misiniz?", vbYesNo) = vbYes Then
+Undo
+DoCmd.Quit
+
+End If
+End Sub
+
+Private Sub ad_Change()
+Komut7.Enabled = True
+
+End Sub
+
+
+Private Sub Form_Open(Cancel As Integer)
+
+GoToPage 1
+End Sub
+
+Private Sub Komut1_Click()
+GoToPage 2
+End Sub
+
+Private Sub Komut10_Click()
+GoToPage 1
+Komut7.Enabled = False
+ad = ""
+End Sub
+
+Private Sub Komut15_Click()
+If IsNull(sifre1) Or IsNull(sifre2) Then
+MsgBox "Şifrenizi oluşturmadan devam edemezsiniz"
+Else
+GoToPage 4
+End If
+End Sub
+
+Private Sub Komut16_Click()
+kapat
+End Sub
+
+Private Sub Komut17_Click()
+GoToPage 2
+Komut15.Enabled = False
+
+End Sub
+
+Private Sub Komut2_Click()
+kapat
+End Sub
+
+Private Sub Komut31_Click()
+
+DoCmd.Close
+DoCmd.OpenForm "Frm_Kullanici_Giris"
+End Sub
+
+Private Sub Komut7_Click()
+If IsNull(ad) Then
+MsgBox "Kullanıcı adınızı belirlemeden devam edemezsiniz"
+Else
+GoToPage 3
+End If
+End Sub
+
+Private Sub Komut8_Click()
+kapat
+End Sub
+
+Private Sub sifre2_AfterUpdate()
+If sifre1 <> sifre2 Then
+MsgBox "Üstte yazdığınız şifre ile uyuşmuyor.. Tekrar deneyiniz.."
+sifre1 = ""
+sifre2 = ""
+sifre1.SetFocus
+Else
+Komut15.SetFocus
+End If
+End Sub
+
+Private Sub sifre2_Change()
+Komut15.Enabled = True
+End Sub

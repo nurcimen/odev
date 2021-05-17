@@ -1,0 +1,41 @@
+Option Compare Database
+Sub mesaj()
+MsgBox "Bir form açtırın.."
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+If yetki = 1 Then
+Komut1.Visible = True
+Komut11.Visible = True
+Etiket5.Visible = True
+Command14.Visible = True
+Command16.Visible = True
+Command18.Visible = True
+Command19.Visible = True
+ElseIf yetki = 2 Then
+Command18.Visible = True
+ElseIf yetki = 3 Then
+Command19.Visible = True
+End If
+End Sub
+
+Private Sub Komut1_Click()
+DoCmd.OpenForm "frm_admin"
+End Sub
+
+Private Sub Komut11_Click()
+DoCmd.OpenForm "Frm_Giris_Kaydi"
+
+End Sub
+
+Private Sub Komut2_Click()
+mesaj
+End Sub
+
+Private Sub Komut3_Click()
+mesaj
+End Sub
+
+Private Sub Komut4_Click()
+mesaj
+End Sub

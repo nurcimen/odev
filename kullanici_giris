@@ -1,0 +1,50 @@
+Option Compare Database
+Private Sub Form_Activate()
+Call fSetAccessWindow(0)
+End Sub
+Option Explicit
+Dim YanlisSifre
+Private Sub Form_Open(Cancel As Integer)
+Dim KulSay As String
+KulSay = DCount("*", "Tbl_Kullanici")
+
+If KulSay = 0 Then
+DoCmd.Close
+DoCmd.OpenForm "Frm_SfrShrbaz"
+End If
+End Sub
+
+Private Sub Komut10_Click()
+On Error GoTo Hata
+Dim str As String
+
+
+    str = oturum.Value
+    On Error GoTo hatas
+    If Me.dogrusifre = Me.sifre Then
+        YetkiNe = Me.dogruyetki
+        KullaniciKim = Me.Kullanici
+        AktifKullaniciYetkisi
+        AktifKullanici
+
+        DoCmd.SetWarnings False
+        CurrentDb.Execute "INSERT INTO tbl_Kullanici_Kayit ( [user] ) SELECT aktifkullanici()"
+        DoCmd.SetWarnings True
+hatas:
+
+        DoCmd.Close
+        DoCmd.OpenForm "frm_ana", , , , , , "Value=" + str
+
+    Else
+        YanlisSifre = YanlisSifre + 1
+        MsgBox YanlisSifre & ". Denemenizde şifrenizi yanlış girdiniz. Lütfen tekrar deneyiniz.. " & Chr(13) & "4. Hatanızda Program Kapanacaktır.", vbOKOnly + vbCritical, "Hatalı Şifre "
+        If YanlisSifre = 4 Then DoCmd.Quit (acQuitSaveNone)
+    End If
+    Exit Sub
+Hata:
+
+End Sub
+
+Private Sub Kullanici_AfterUpdate()
+Me.sifre.SetFocus
+End Sub

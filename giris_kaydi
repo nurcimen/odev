@@ -1,0 +1,15 @@
+Option Compare Database
+Private Sub Form_Activate()
+Call fSetAccessWindow(0)
+End Sub
+Private Sub Form_Open(Cancel As Integer)
+
+End Sub
+
+Private Sub Komut4_Click()
+DoCmd.Close
+End Sub
+
+Private Sub kutu_AfterUpdate()
+Liste0.Requery
+End Sub

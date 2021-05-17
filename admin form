@@ -1,0 +1,57 @@
+Option Compare Database
+
+Private Sub ar2_Click()
+On Error Resume Next
+DoCmd.GoToRecord , , acFirst
+End Sub
+
+Private Sub Form_Activate()
+Call fSetAccessWindow(0)
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+DoCmd.GoToRecord , , acNewRec
+
+End Sub
+
+Private Sub Komut16_Click()
+On Error Resume Next
+DoCmd.GoToRecord , , acNext
+
+End Sub
+
+Private Sub Komut17_Click()
+On Error Resume Next
+DoCmd.GoToRecord , , acPrevious
+End Sub
+
+Private Sub Komut19_Click()
+On Error Resume Next
+DoCmd.GoToRecord , , acNewRec
+Metin0.SetFocus
+
+End Sub
+
+Private Sub Komut20_Click()
+On Error Resume Next
+DoCmd.GoToRecord , , acLast
+
+End Sub
+
+Private Sub Komut28_Click()
+Me.Undo
+End Sub
+
+Private Sub Komut30_Click()
+On Error Resume Next
+If Me.NewRecord Then
+Me.Undo
+ElseIf MsgBox("Şifre Kaydı Silinmek Üzere. Emin misiniz?", vbYesNo, "Nur") = vbYes Then
+Me.Recordset.Delete
+End If
+Me.Metin0.SetFocus
+End Sub
+
+Private Sub Komut7_Click()
+DoCmd.Close
+End Sub

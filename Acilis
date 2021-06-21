@@ -1,0 +1,10 @@
+Option Compare Database
+Option Explicit
+Global YetkiNe As Byte
+Global KullaniciKim As Integer
+Public Function AktifKullaniciYetkisi() As Byte
+AktifKullaniciYetkisi = YetkiNe
+End Function
+Public Function AktifKullanici() As Integer
+AktifKullanici = KullaniciKim
+End Function
